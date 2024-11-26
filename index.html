@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Ulang Tahun Cantika</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
+
+        body {
+            font-family: 'Rubik', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ffafbd, #ffc3a0);
+            color: #fff;
+        }
+
+        .countdown-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .countdown div {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .countdown div span {
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            color: #ffebcd;
+            font-weight: normal;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .btn.active {
+            background-color: #4caf50;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .countdown div {
+                font-size: 1.2rem;
+            }
+
+            .countdown div span {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .countdown {
+                grid-template-columns: 1fr;
+            }
+
+            .countdown div {
+                font-size: 1rem;
+                padding: 10px;
+            }
+
+            .countdown div span {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>Selamat Ulang Tahun!</h1>
+        <div class="countdown">
+            <div>
+                <span id="days">00</span>
+                Hari
+            </div>
+            <div>
+                <span id="hours">00</span>
+                Jam
+            </div>
+            <div>
+                <span id="minutes">00</span>
+                Menit
+            </div>
+            <div>
+                <span id="seconds">00</span>
+                Detik
+            </div>
+        </div>
+        <a id="celebrate-btn" class="btn" href="#" target="_blank" style="pointer-events: none; opacity: 0.5;">Klik untuk lihat kejutan!</a>
+    </div>
+
+    <audio id="background-music" src="waitingfix.mp3" autoplay loop></audio>
+
+    <script>
+        const targetDate = new Date("2024-12-09T20:00:00"); // Atur tanggal ulang tahun Anda
+        const button = document.getElementById("celebrate-btn");
+
+        function updateCountdown() {
+            const currentDate = new Date();
+            const totalSeconds = Math.max(0, Math.floor((targetDate - currentDate) / 1000)); // Tetap 0 jika waktu habis
+            const days = Math.floor(totalSeconds / 3600 / 24);
+            const hours = Math.floor((totalSeconds / 3600) % 24);
+            const minutes = Math.floor((totalSeconds / 60) % 60);
+            const seconds = Math.floor(totalSeconds % 60);
+
+            document.getElementById("days").textContent = days.toString().padStart(2, "0");
+            document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+            document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+            document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+
+            // Jika waktu telah habis, aktifkan tombol
+            if (totalSeconds === 0) {
+                button.style.pointerEvents = "auto"; // Membolehkan klik
+                button.style.opacity = "1"; // Mengembalikan opacity normal
+                button.href = "https://jokonh.short.gy/UltahCantika"; // Ganti dengan link yang diinginkan
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
